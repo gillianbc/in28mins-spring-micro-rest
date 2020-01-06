@@ -1,4 +1,4 @@
-package com.gillianbc;
+package com.gillianbc.helloworld;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,14 +33,14 @@ public class HelloWorldController {
 	// Getting a bean
 	@GetMapping(path="bean")
 	public HelloWorldBean beany() {
-		return new HelloWorldBean("I am a bean");
+		return new HelloWorldBean("I am a little bean");
 	}
 
 	
 	// Getting a bean with a param
 	@GetMapping(path = "bean/{id}")
 	public HelloWorldBean beany2(@PathVariable	String id) {
-		return new HelloWorldBean("I am bean too ", id) ;
+		return new HelloWorldBean("I am little bean too ", id) ;
 	}
 
 

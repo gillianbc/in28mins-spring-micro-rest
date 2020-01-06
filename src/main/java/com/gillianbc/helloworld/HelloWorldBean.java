@@ -1,14 +1,14 @@
-package com.gillianbc;
+package com.gillianbc.helloworld;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 public class HelloWorldBean {
 	private String message;
 	private final int age;
 	private final Date date;
-	List<String> list = new LinkedList<String>();
+	List<String> list = new ArrayList<>();
 	private String id;
 
 	public HelloWorldBean(String message) {
