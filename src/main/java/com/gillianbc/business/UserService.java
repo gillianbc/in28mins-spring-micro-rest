@@ -28,7 +28,11 @@ public class UserService{
 	
 	@GetMapping("/users/{id}")
 	public User findOne(@PathVariable int id) {
-		return dao.findOne(id);
+		User user = dao.findOne(id);
+		if (user == null) {
+			throw new UserNotFoundException("No user was found for id: " + id );
+		}
+		return user;
 	}
 	
 	@PostMapping("/users")
