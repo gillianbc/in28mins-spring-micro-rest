@@ -8,7 +8,6 @@ public class User {
 	private Date birthDate;
 	
 	//In older versions of spring/jackson, a no args constructor is required
-	
 	public User() {
 		
 	}
