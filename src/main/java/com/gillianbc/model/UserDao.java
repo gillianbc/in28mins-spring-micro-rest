@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 import org.springframework.stereotype.Component;
+
+import com.gillianbc.business.InvalidUserException;
 
 @Component
 public class UserDao {
@@ -32,10 +35,31 @@ public class UserDao {
 	}
 	
 	public User save(User user) {
-		if (user.getId() == null) {
-			user.setId(++userCount);
+		int id = 0;
+		
+		try {
+			 id = user.getId();
+			
+		} catch (Exception e) {
+			user.setId(userCount + 1);
 		}
+		
+		if (duplicateUser(id)) {
+			throw new InvalidUserException("There is already a user with this id");
+		}
+		
+		++userCount;
+		
 		users.add(user);
 		return user;
+	}
+	
+	private boolean duplicateUser(int id) {
+		System.out.println("THE ID IS "+ id);
+		long count = users.stream()
+		.filter(user -> user.getId() == id)
+		.count();
+		System.out.println("THE COUNT IS " + count);
+		return count > 0;
 	}
 }

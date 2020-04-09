@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.gillianbc.business.InvalidUserException;
 import com.gillianbc.business.UserNotFoundException;
 
 /**
@@ -44,17 +45,29 @@ public class GillianBCResponseEntityExceptionHandler extends ResponseEntityExcep
 	
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) throws Exception {
-		return new ResponseEntity<Object>(makeExceptionResponse(ex, request), HttpStatus.INTERNAL_SERVER_ERROR);
+		ExceptionResponse exResponse = new ExceptionResponse(
+				new Date(), 
+				ex.getMessage(),
+				request.getDescription(false),
+				ex.getStackTrace());
+		return new ResponseEntity<Object>(exResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(UserNotFoundException.class)
 	public final ResponseEntity<Object> handleNotFoundExceptions(Exception ex, WebRequest request) throws Exception {
 		return new ResponseEntity<Object>(makeExceptionResponse(ex, request), HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(InvalidUserException.class)
+	public final ResponseEntity<Object> handleInvalidDataExceptions(Exception ex, WebRequest request) throws Exception {
+		return new ResponseEntity<Object>(makeExceptionResponse(ex, request), HttpStatus.BAD_REQUEST);
+	}
 
 	private ExceptionResponse makeExceptionResponse(Exception ex, WebRequest request) {
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-				request.getDescription((false)));
+		ExceptionResponse exceptionResponse = new ExceptionResponse(
+				new Date(), 
+				ex.getMessage(),
+				request.getDescription(false));
 		return exceptionResponse;
 	}
 	

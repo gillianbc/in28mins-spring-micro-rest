@@ -25,7 +25,11 @@ public class UserService{
 	
 	@GetMapping("/users")
 	public List<User> findAll(){
-		return dao.findAll();
+		List<User> users = dao.findAll();
+		if (users == null) {
+			throw new UserNotFoundException("No users were found");
+		}
+		return users;
 	}
 	
 	@GetMapping("/users/{id}")
@@ -51,7 +55,7 @@ public class UserService{
 		.path("/{id}")
 		.buildAndExpand(savedUser.getId())
 		.toUri();
-		// By default, the status is 200 OK, but the best practice is Created 201
+		// By default, the status is 200 OK, but best practice is Created 201
 		return ResponseEntity.created(location).build();
 	}
 	

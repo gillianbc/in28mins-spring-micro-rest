@@ -6,13 +6,25 @@ public class ExceptionResponse {
 	private Date timestamp;
 	private String message;
 	private String details;
+	private StackTraceElement[] extraDetails;
 
-	public ExceptionResponse(Date timestamp, String message, String details) {
+	public ExceptionResponse(Date timestamp, String message, String details, StackTraceElement[] extraDetails) {
 		super();
 		this.timestamp = timestamp;
 		this.message = message;
 		this.details = details;
+		this.extraDetails = extraDetails;
 	}
+	
+	public ExceptionResponse(Date timestamp, String message, String details) {
+		this(timestamp, message, details, null);
+		
+	}
+
+	public StackTraceElement[] getExtraDetails() {
+		return extraDetails;
+	}
+
 
 	public Date getTimestamp() {
 		return timestamp;
