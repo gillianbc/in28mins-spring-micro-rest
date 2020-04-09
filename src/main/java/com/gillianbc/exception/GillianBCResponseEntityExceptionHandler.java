@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.gillianbc.business.InvalidUserException;
-import com.gillianbc.business.UserNotFoundException;
+import com.gillianbc.business.exception.InvalidUserException;
+import com.gillianbc.business.exception.UserNotFoundException;
 
 /**
  * The name of the class is GillianBC as this should be used across projects.  i.e.

@@ -1,4 +1,4 @@
-package com.gillianbc.business;
+package com.gillianbc.business.service;
 
 import java.net.URI;
 import java.util.List;
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gillianbc.business.exception.UserNotFoundException;
 import com.gillianbc.model.User;
 import com.gillianbc.model.UserDao;
 
 @RestController
 public class UserService{
 	
-	// some comment
 	
 	@Autowired
 	UserDao dao;

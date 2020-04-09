@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import org.springframework.stereotype.Component;
 
-import com.gillianbc.business.InvalidUserException;
+import com.gillianbc.business.exception.InvalidUserException;
 
 @Component
 public class UserDao {
@@ -18,7 +17,6 @@ public class UserDao {
 		users.add(new User(1,"Adam", new Date()));
 		users.add(new User(2,"Eve", new Date()));
 		users.add(new User(3,"Jacob", new Date()));
-		
 	}
 	
 	public List<User> findAll(){

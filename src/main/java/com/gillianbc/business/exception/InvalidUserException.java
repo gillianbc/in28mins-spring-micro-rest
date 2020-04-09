@@ -1,4 +1,4 @@
-package com.gillianbc.business;
+package com.gillianbc.business.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
