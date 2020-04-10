@@ -3,6 +3,8 @@ package com.gillianbc.business.service;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,7 +45,7 @@ public class UserService{
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<Object> createuser(@RequestBody User user) {
+	public ResponseEntity<Object> createuser(@Valid @RequestBody User user) {
 		User savedUser = dao.save(user);
 		// We want to return the uri of the newly created record e.g. /users/56
 		// We can get the first part, /users, from the request

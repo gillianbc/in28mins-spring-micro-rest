@@ -20,4 +20,12 @@ We use the following annotations in class GillianBCResponseEntityExceptionHandle
 - @ControllerAdvice
 - @ExceptionHandler
 
+## Validation
+We validate the request bodies using the @Valid on the service requests that have bodies.
 
+We define our constraints in the entity classes i.e. User and Post using the javax.validation.constraints such as:
+
+- @Size
+- @Past
+
+We override the method handleMethodArgumentNotValid() in class GillianBCResponseEntityExceptionHandler to give our own custom error response

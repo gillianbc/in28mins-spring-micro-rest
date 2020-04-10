@@ -2,8 +2,10 @@ package com.gillianbc.exception;
 
 import java.util.Date;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +53,17 @@ public class GillianBCResponseEntityExceptionHandler extends ResponseEntityExcep
 				request.getDescription(false),
 				ex.getStackTrace());
 		return new ResponseEntity<Object>(exResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(
+			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+		ExceptionResponse exResponse = new ExceptionResponse(
+				new Date(), 
+				ex.getMessage(),
+				ex.getBindingResult().getFieldError().toString());
+		
+		return new ResponseEntity<Object>(exResponse, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(UserNotFoundException.class)
