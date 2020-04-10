@@ -77,6 +77,10 @@ public class PostService {
 		return ResponseEntity.created(location).build();
 	}
 	
-	
+	@DeleteMapping("/users/{userid}/posts/{postid}")
+	public void deletePost(@PathVariable int userid, @PathVariable int postid){
+		dao.delete(userid, postid);
+		
+	}
 
 }

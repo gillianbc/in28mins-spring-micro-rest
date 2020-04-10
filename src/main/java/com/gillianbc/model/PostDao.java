@@ -49,16 +49,36 @@ public class PostDao {
 	}
 
 	public Post save(Post post) {
-		//check user exists
-		User user = userdao.findOne(post.getUserId());
-		if (user == null) {
-			throw new UserNotFoundException("No such user");
-		}
+		checkUserExists(post.getUserId());
 		
         ++postCount;
         post.setId(postCount);
 		posts.add(post);
 		return post;
+	}
+
+	private void checkUserExists(int userid) {
+		User user = userdao.findOne(userid);
+		if (user == null) {
+			throw new UserNotFoundException("No such user");
+		}
+	}
+
+	private void checkPostExists(int userid, int postid) {
+		Post post = findOne(postid);
+		if (post == null || post.getUserId() != userid) {
+			throw new UserNotFoundException("No such post for that user");
+		}
+	}
+	
+	public int delete(int userid, int postid) {
+		checkUserExists(userid);
+		checkPostExists(userid, postid);
+		
+		posts = posts.stream()
+		.filter(post -> post.getId() != postid)
+		.collect(toList());
+		return postid;
 	}
 
 	

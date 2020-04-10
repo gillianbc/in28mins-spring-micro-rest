@@ -19,6 +19,7 @@ public class UserDao {
 		users.add(new User(3,"Jacob", new Date()));
 	}
 	
+	
 	public List<User> findAll(){
 		return users;
 	}
