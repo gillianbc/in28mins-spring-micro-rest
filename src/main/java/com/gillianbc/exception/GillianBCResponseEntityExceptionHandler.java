@@ -60,9 +60,8 @@ public class GillianBCResponseEntityExceptionHandler extends ResponseEntityExcep
 			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 		ExceptionResponse exResponse = new ExceptionResponse(
 				new Date(), 
-				ex.getMessage(),
-				ex.getBindingResult().getFieldError().toString());
-		
+				"Validation Error",
+				ex.getBindingResult().getFieldError().getDefaultMessage());
 		return new ResponseEntity<Object>(exResponse, HttpStatus.BAD_REQUEST);
 	}
 	

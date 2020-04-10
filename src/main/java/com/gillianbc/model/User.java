@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 public class User {
 	private Integer id;
 	
-	@Size(min=2)
+	@Size(min=2, max=100, message = "Name should be between 2 and 100 characters")
 	private String name;
 	
 	@Past
