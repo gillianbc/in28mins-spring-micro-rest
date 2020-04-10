@@ -1,11 +1,17 @@
 package com.gillianbc.business.service;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gillianbc.business.exception.PostNotFoundException;
 import com.gillianbc.business.exception.UserNotFoundException;
@@ -52,6 +58,25 @@ public class PostService {
 		return post;
 	}
 	
-	//TODO Post a Post
+	@PostMapping("/users/{userid}/posts")
+	public ResponseEntity<Object> createPost(@RequestBody Post post, @PathVariable int userid) {
+		post.setUserId(userid);
+		Post savedPost = dao.save(post);
+		// We want to return the uri of the newly created record e.g. /users/56/post/3
+		// We can get the first part, /users/56/post, from the request
+		// We add a placeholder to the path:  /users/56/post/{postid}
+		// We can get the id from the post created and sub it into the placeholder /users/56/post/3
+		// We can build that whole thing as a uri
+		
+		URI location = ServletUriComponentsBuilder
+		.fromCurrentRequest()
+		.path("/{id}")
+		.buildAndExpand(savedPost.getId())
+		.toUri();
+		// By default, the status is 200 OK, but best practice is Created 201
+		return ResponseEntity.created(location).build();
+	}
+	
+	
 
 }
