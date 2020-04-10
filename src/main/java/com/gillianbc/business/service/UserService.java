@@ -3,6 +3,8 @@ package com.gillianbc.business.service;
 import java.net.URI;
 import java.util.List;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 
 import com.gillianbc.business.exception.UserNotFoundException;
 import com.gillianbc.model.User;
@@ -32,6 +35,7 @@ public class UserService{
 		if (users == null) {
 			throw new UserNotFoundException("No users were found");
 		}
+		
 		return users;
 	}
 	
@@ -41,6 +45,8 @@ public class UserService{
 		if (user == null) {
 			throw new UserNotFoundException("No user was found for id: " + id );
 		}
+		
+		
 		return user;
 	}
 	

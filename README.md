@@ -15,7 +15,7 @@ The app is available on localhost:8080
 Try it via Postman e.g. `GET http://localhost:8080/users`
 
 # Spring Exception Handling
-We use the following annotations in class GillianBCResponseEntityExceptionHandler to provide a customised exception handler
+We use the following annotations in bean GillianBCResponseEntityExceptionHandler to provide a customised exception handler
 - @RestController
 - @ControllerAdvice
 - @ExceptionHandler
@@ -23,9 +23,28 @@ We use the following annotations in class GillianBCResponseEntityExceptionHandle
 ## Validation
 We validate the request bodies using the @Valid on the service requests that have bodies.
 
-We define our constraints in the entity classes i.e. User and Post using the javax.validation.constraints such as:
+We define our constraints in the entity beans i.e. User and Post using the javax.validation.constraints from validation-api.jar such as:
 
 - @Size
 - @Past
 
+hibernate-validator.jar implements the validations defined in validation-api.jar.
+
 We override the method handleMethodArgumentNotValid() in class GillianBCResponseEntityExceptionHandler to give our own custom error response
+
+# HATEOAS
+I've skipped the implementation since the packages used in the course are quite old and a lot has changed since - see https://docs.spring.io/spring-hateoas/docs/current/reference/html/#fundamentals
+I'll revisit this if and when the need arises
+
+# Internationalization aka i18n
+
+We can return different responses depending on the requested language.
+
+We set a default locale in the main application class and set up some resources containing the messages we need in different languages.  The base name of the resource file is declared as *message*.
+i.e. `message.properties`.
+
+We must then define the others using an underscore and the language e.g. `message_fr.properties`.
+
+In the Hello World controller, we use the @RequestHeader annotation to get the locale from the Accept-Language header of the request.
+When we request with Accept-Language = FR, Spring automatically knows to use the `message_fr.properties` file.
+
