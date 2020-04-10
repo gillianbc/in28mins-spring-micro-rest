@@ -1,17 +1,24 @@
 package com.gillianbc.model;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gillianbc.business.exception.InvalidUserException;
+import com.gillianbc.business.exception.UserNotFoundException;
 
 @Component
 public class UserDao {
 	private static List<User> users = new ArrayList<>();
 	private static int userCount = 3;
+	
+	@Autowired
+	PostDao postdao;
 	
 	static {
 		users.add(new User(1,"Adam", new Date()));
@@ -61,4 +68,23 @@ public class UserDao {
 		System.out.println("THE COUNT IS " + count);
 		return count > 0;
 	}
+
+	public int delete(int userid) {
+		checkUserExists(userid);
+		postdao.deleteAllForUser(userid);
+		users = users.stream()
+				.filter(user -> user.getId() != userid)
+				.collect(toList());
+				return userid;
+	}
+
+	public void checkUserExists(int userid) {
+		User user = findOne(userid);
+		if (user == null) {
+			throw new UserNotFoundException("No such user");
+		}
+		
+	}
+	
+	
 }

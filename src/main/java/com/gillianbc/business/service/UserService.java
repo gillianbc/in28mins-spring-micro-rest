@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,12 @@ public class UserService{
 		.toUri();
 		// By default, the status is 200 OK, but best practice is Created 201
 		return ResponseEntity.created(location).build();
+	}
+	
+	@DeleteMapping("/users/{userid}")
+	public void deleteUser(@PathVariable int userid){
+		dao.delete(userid);
+		
 	}
 	
 }

@@ -33,7 +33,6 @@ public class PostDao {
 	}
 	
 	public List<Post> findAllByUser(int userid) {
-		// TODO Auto-generated method stub
 		return posts.stream()
 				.filter(post -> post.getUserId() == userid)
 				.collect(toList());
@@ -49,7 +48,7 @@ public class PostDao {
 	}
 
 	public Post save(Post post) {
-		checkUserExists(post.getUserId());
+		userdao.checkUserExists(post.getUserId());
 		
         ++postCount;
         post.setId(postCount);
@@ -57,11 +56,11 @@ public class PostDao {
 		return post;
 	}
 
-	private void checkUserExists(int userid) {
-		User user = userdao.findOne(userid);
-		if (user == null) {
-			throw new UserNotFoundException("No such user");
-		}
+	public void deleteAllForUser(int userid) {
+		userdao.checkUserExists(userid);
+		posts = posts.stream()
+				.filter(post -> post.getUserId() != userid)
+				.collect(toList());
 	}
 
 	private void checkPostExists(int userid, int postid) {
@@ -72,7 +71,7 @@ public class PostDao {
 	}
 	
 	public int delete(int userid, int postid) {
-		checkUserExists(userid);
+		userdao.checkUserExists(userid);
 		checkPostExists(userid, postid);
 		
 		posts = posts.stream()
