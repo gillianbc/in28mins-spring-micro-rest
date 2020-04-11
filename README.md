@@ -59,3 +59,11 @@ To allow data to be returned as xml (as well as the default, JSON), all we had t
 </dependency>
 ```
 
+# Swagger API Documentation
+
+- two swagger dependencies in the pom.xml
+- SwaggerConfiguration class
+- <http://localhost:8080/v2/api-docs>
+- <http://localhost:8080/swagger-ui.html>
+
+
