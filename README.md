@@ -66,4 +66,5 @@ To allow data to be returned as xml (as well as the default, JSON), all we had t
 - <http://localhost:8080/v2/api-docs>
 - <http://localhost:8080/swagger-ui.html>
 
-
+The versions I'm using caused a known issue with the rendering of the api-docs in thr browser.
+Added a RequestMappingHandlerAdapter bean to fix it.
