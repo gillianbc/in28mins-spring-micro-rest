@@ -48,5 +48,14 @@ We must then define the others using an underscore and the language e.g. `messag
 In the Hello World controller, we use the @RequestHeader annotation to get the locale from the Accept-Language header of the request.
 When we request with Accept-Language = FR, Spring automatically knows to use the `message_fr.properties` file.  (It doesn't have to be a real country code;  Spring is just matching the characters in the header).
 
+# Content Negotiation
 
+To allow data to be returned as xml (as well as the default, JSON), all we had to do was add this depndency to the pom:
+
+```
+<dependency>
+	<groupId>com.fasterxml.jackson.dataformat</groupId>
+	<artifactId>jackson-dataformat-xml</artifactId>
+</dependency>
+```
 

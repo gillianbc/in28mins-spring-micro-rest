@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gillianbc.business.exception.PostNotFoundException;
-import com.gillianbc.business.exception.UserNotFoundException;
 import com.gillianbc.model.Post;
 import com.gillianbc.model.PostDao;
-import com.gillianbc.model.User;
 
 @RestController
 public class PostService {
