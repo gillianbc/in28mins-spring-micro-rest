@@ -68,3 +68,9 @@ To allow data to be returned as xml (as well as the default, JSON), all we had t
 
 The versions I'm using caused a known issue with the rendering of the api-docs in thr browser.
 Added a RequestMappingHandlerAdapter bean to fix it.
+
+# Actuator - Monitoring Activity 
+Skipped that lecture - couldn't get it to work, nor HATEOAS links.  See my Q and A on Udemy.  
+
+
+

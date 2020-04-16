@@ -43,11 +43,16 @@ public class RestfulWebServicesApplication {
 	    RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
 	    MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 	    List<MediaType> mediaTypeList = new ArrayList<>();
+	    
 	    mediaTypeList.add(MediaType.APPLICATION_JSON);
 	    mediaTypeList.add(MediaType.APPLICATION_XML);
+	    mediaTypeList.add(MediaType.TEXT_HTML);
+ 	    
 	    converter.setSupportedMediaTypes(mediaTypeList);
 	    adapter.getMessageConverters().add(converter);
 	    return adapter;
 	}
+	
+	
 
 }
