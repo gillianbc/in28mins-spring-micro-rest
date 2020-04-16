@@ -70,7 +70,11 @@ The versions I'm using caused a known issue with the rendering of the api-docs i
 Added a RequestMappingHandlerAdapter bean to fix it.
 
 # Actuator - Monitoring Activity 
-Skipped that lecture - couldn't get it to work, nor HATEOAS links.  See my Q and A on Udemy.  
+Skipped that lecture - couldn't get it to work, nor HATEOAS links. Problems with dependency issues and  conflicts.  See my Q and A on Udemy.  
 
+# Filtering
+Simple pojo HaricotBean.java is used to demo this feature
 
+- static filtering using @JsonIgnore on field declarations
+- static filtering at class level using @JsonIgnoreProperties(value = {"field1", "field2"})
 
