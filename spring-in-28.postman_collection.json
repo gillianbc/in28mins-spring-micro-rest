@@ -37,15 +37,58 @@
 			"response": []
 		},
 		{
-			"name": "filtering",
+			"name": "filtering (with visualizer)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0ffdceb1-73fe-4ac5-9867-819a16f3e48e",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b1a282ac-1d5d-4881-a6e8-bfb191432011",
+						"exec": [
+							"var template = `",
+							"    <table bgcolor=\"#FFEECCF\">",
+							"        <tr>",
+							"            <th>Field1</th>",
+							"            <th>Field2</th>",
+							"            <th>Field3</th>",
+							"        </tr>",
+							"",
+							"        {{#each response}}",
+							"            <tr>",
+							"                <td>{{field1}}</td>",
+							"                <td>{{field2}}</td>",
+							"                <td>{{field3}}</td>",
+							"            </tr>",
+							"        {{/each}}",
+							"    </table>",
+							"`;",
+							"",
+							"// Set visualizer",
+							"pm.visualizer.set(template, {",
+							"    // Pass the response body parsed as JSON as `data`",
+							"    response: pm.response.json()",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Accept",
 						"type": "text",
-						"value": "application/xml",
-						"disabled": true
+						"value": "application/json"
 					},
 					{
 						"key": "Accept",
@@ -55,14 +98,15 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/filtering",
+					"raw": "http://localhost:8080/filtering/all",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"filtering"
+						"filtering",
+						"all"
 					]
 				}
 			},

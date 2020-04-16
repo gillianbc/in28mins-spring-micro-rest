@@ -1,13 +1,11 @@
 package com.gillianbc.business.filtering;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(value = {"field1", "field2"})
 public class HaricotBean {
 	private String field1;
 	private String field2;
-	
-	// This annotation will remove field3 from all responses
-	@JsonIgnore
 	private String field3;
 	
 	public HaricotBean(String field1, String field2, String field3) {
